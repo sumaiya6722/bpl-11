@@ -2,7 +2,7 @@ import React, {use, useState} from 'react';
 import AvailablePlayers from '../availablePlayers/AvailablePlayers';
 import SelectedPlayers from '../selectedPlayers/SelectedPlayers';
 
-const Players = ({playerPromise}) => {
+const Players = ({playerPromise, setCoin}) => {
   const players = use(playerPromise);
   const [selectedButton, setSelectedButton] = useState("available");  //selectedButton stores which button is active....default is 'available'
   return (
@@ -19,7 +19,7 @@ const Players = ({playerPromise}) => {
       </div>
 
 
-      {selectedButton==='available' ? <AvailablePlayers players = {players}></AvailablePlayers> : <SelectedPlayers></SelectedPlayers>}
+      {selectedButton==='available' ? <AvailablePlayers setCoin={setCoin} players = {players}></AvailablePlayers> : <SelectedPlayers></SelectedPlayers>}
     </div>
   );
 };
