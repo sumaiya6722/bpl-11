@@ -4,14 +4,14 @@ import { FaFlag } from "react-icons/fa";
 import Card from '../card/Card';
 
 
-const AvailablePlayers = ({players, setCoin}) => {
+const AvailablePlayers = ({players, setCoin, coin, selectedPlayers, setSelectedPlayers}) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-      {players.map(player => {
+      {players.map((player,index) => {
           return (
             <div>
-              <Card setCoin={setCoin} player={player}></Card>
+          <Card key={index} setCoin={setCoin} setSelectedPlayers={setSelectedPlayers} selectedPlayers={selectedPlayers} player={player} coin={coin}></Card>
 
             </div>
       )})
