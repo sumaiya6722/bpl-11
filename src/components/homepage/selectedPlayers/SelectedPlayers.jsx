@@ -1,29 +1,26 @@
 import React from 'react';
 import { MdDelete } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
+import SelectedCard from './SelectedCard';
 
-const SelectedPlayers = ({selectedPlayers, setSelectedPlayers}) => {
+const SelectedPlayers = ({selectedPlayers, setSelectedPlayers, coin, setCoin }) => {
   
   const handleDeletePlayer = (player) => {
-    const filteredPlayer = selectedPlayers.filter(filtPlayer => filtPlayer.playerName != player.playerName);
+    const filteredPlayer = selectedPlayers.filter(filtPlayer => filtPlayer.playerName != player.playerName); //here filterPlayer is basically player who isn't selected
     setSelectedPlayers(filteredPlayer);
+    setCoin(coin + player.price);   //player.price is the price for player who is selected
   }
 
 
   return (
     <div className=''>
-      {selectedPlayers.map((player, ind) => {
-        return (<div key={ind} className='border border-gray-300 flex items-center gap-6 justify-between rounded-2xl p-3 mb-5'>
-                  <div className='flex items-center gap-3'>
-                    <img className='rounded-xl h-25 w-25' src={player.image} alt="" />
-                    <div>
-                      <h2 className='font-bold text-2xl'><FaUser />{player.playerName}</h2>
-                      <p>{player.battingStyle}</p>
-                    </div>
-                  </div>
-
-                    <button onClick={() => handleDeletePlayer(player)} className='btn font-bold text-3xl text-red-600'><MdDelete /></button>
-                </div>)
+      {selectedPlayers.length === 0 ?
+       <div className='border rounded-xl p-20 text-center'>
+        <h3 className='font-semibold text-2xl'>No Players Selected Yet</h3>
+        <p className='text-xl'>Go to Available tab to select Players</p>
+       </div> : 
+       selectedPlayers.map((player, ind) => {
+        return (<SelectedCard key={ind} player={player} handleDeletePlayer={handleDeletePlayer}></SelectedCard>);
       })}
     </div>);
   
